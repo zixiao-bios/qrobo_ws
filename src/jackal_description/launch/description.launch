@@ -1,16 +1,33 @@
 <launch>
-  <arg name="config" default="base" />
-  <arg name="env_runner" value="env_run" />
+  <!-- gazebo config -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
 
+  <!-- robot config -->
+  <arg name="config" default="base" />
   <param name="robot_description"
-         command="$(find jackal_description)/scripts/$(arg env_runner)
+         command="$(find jackal_description)/scripts/env_run
                     $(find jackal_description)/urdf/configs/$(arg config)
                     $(find xacro)/xacro $(find jackal_description)/urdf/jackal.urdf.xacro
                     --inorder" />
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="debug" value="$(arg debug)" />
+      <arg name="gui" value="$(arg gui)" />
+      <arg name="paused" value="$(arg paused)"/>
+      <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+      <arg name="headless" value="$(arg headless)"/>
+  </include>
                     
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
   <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find jackal_description)/config/urdf.rviz" required="true"/>
+
+  <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -param robot_description -model jackal" />
 </launch>
