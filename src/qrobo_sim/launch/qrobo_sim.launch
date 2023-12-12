@@ -34,7 +34,7 @@
   <!-- 加载控制器 -->
   <rosparam command="load" file="$(find qrobo_sim)/config/control.yaml" />
   <node name="controller_spawner" pkg="controller_manager" type="spawner"
-        args="jackal_joint_publisher jackal_velocity_controller" />
+        args="joint_publisher velocity_controller" />
 
   <!--  -->
   <group if="$(arg enable_ekf)" >
@@ -57,10 +57,4 @@
       <param name="ekf_localization/imu1" value="$(optenv JACKAL_IMU_MICROSTRAIN_NAME microstrain)/imu/data"/>
     </group>
   </group>
-
-  <!-- 融合速度指令 -->
-  <node pkg="twist_mux" type="twist_mux" name="twist_mux">
-    <rosparam command="load" file="$(find qrobo_sim)/config/twist_mux.yaml" />
-    <remap from="cmd_vel_out" to="jackal_velocity_controller/cmd_vel"/>
-  </node>
 </launch>
