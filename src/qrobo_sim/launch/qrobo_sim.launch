@@ -10,12 +10,7 @@
   <arg name="debug" default="false"/>
 
   <!-- robot config -->
-  <arg name="config" default="base" />
-  <param name="robot_description"
-         command="$(find jackal_description)/scripts/env_run
-                    $(find jackal_description)/urdf/configs/$(arg config)
-                    $(find xacro)/xacro $(find jackal_description)/urdf/jackal.urdf.xacro
-                    --inorder" />
+  <param name="robot_description" command="$(find xacro)/xacro $(find jackal_description)/urdf/jackal.urdf.xacro" />
   
   <!-- 启动 gazebo -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
