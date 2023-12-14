@@ -4,4 +4,8 @@
   </include>
 
   <include file="$(find qrobo_sim)/launch/qrobo_sim.launch" />
+
+  <include file="$(find qrobo_mapping)/launch/gmapping.launch" />
+
+  <include file="$(find qrobo_sim)/launch/teleop_joy.launch" />
 </launch>
