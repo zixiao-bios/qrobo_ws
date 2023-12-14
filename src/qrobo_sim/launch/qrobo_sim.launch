@@ -1,7 +1,4 @@
 <launch>
-  <!-- 参数 -->
-  <arg name="enable_ekf" default="$(optenv ENABLE_EKF false)"/>
-
   <!-- gazebo 参数 -->
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
@@ -28,28 +25,5 @@
 
   <!-- 加载控制器 -->
   <rosparam command="load" file="$(find qrobo_sim)/config/control.yaml" />
-  <node name="controller_spawner" pkg="controller_manager" type="spawner"
-        args="joint_publisher velocity_controller" />
-
-  <!--  -->
-  <group if="$(arg enable_ekf)" >
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
-      <rosparam command="load" file="$(find jackal_control)/config/robot_localization.yaml" />
-    </node>
-
-    <group if="$(optenv JACKAL_IMU_MICROSTRAIN 0)">
-      <!-- Optionally load the configuration for the Microstrain-family IMU -->
-      <rosparam>
-        ekf_localization:
-          imu1: microstrain/imu/data
-          imu1_config: [false, false, false,
-                      true, true, true,
-                      false, false, false,
-                      true, true, true,
-                      false, false, false]
-          imu1_differential: false
-      </rosparam>
-      <param name="ekf_localization/imu1" value="$(optenv JACKAL_IMU_MICROSTRAIN_NAME microstrain)/imu/data"/>
-    </group>
-  </group>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_publisher velocity_controller" />
 </launch>
