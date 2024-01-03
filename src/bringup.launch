@@ -10,6 +10,7 @@
   <!-- <include file="$(find qrobo_mapping)/launch/gmapping.launch" /> -->
 
   <include file="$(find qrobo_nav)/launch/amcl.launch" />
+  <include file="$(find qrobo_nav)/launch/move_base.launch" />
 
   <include file="$(find qrobo_sim)/launch/teleop_joy.launch" />
 </launch>
