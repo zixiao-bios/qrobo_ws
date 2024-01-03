@@ -36,7 +36,7 @@
                     <range>
                       <!-- 最近&最远距离，该范围外的物体不可见 -->
                       <min>0.10</min>
-                      <max>5.0</max>
+                      <max>15.0</max>
                       <!-- 距离分辨率（精度），这里为1cm -->
                       <resolution>0.01</resolution>
                     </range>
