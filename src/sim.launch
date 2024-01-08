@@ -1,0 +1,14 @@
+<launch>
+  <!-- gazebo仿真世界 -->
+  <!-- <arg name="gazebo_world" value="office_small.world" /> -->
+  <arg name="gazebo_world" value="$(find qrobo_sim)/worlds/racecar_runway_without_cone.world" />
+
+  <!-- 机器人生成位置 -->
+  <!-- <arg name="spawn_xyz" value="-x 0 -y 0 -z 0"/> -->
+  <arg name="spawn_xyz" value="-x -6 -y -2 -z 1"/>
+
+  <include file="$(find qrobo_sim)/launch/qrobo_sim.launch" >
+    <arg name="gazebo_world" value="$(arg gazebo_world)" />
+    <arg name="spawn_xyz" value="$(arg spawn_xyz)"/>
+  </include>
+</launch>

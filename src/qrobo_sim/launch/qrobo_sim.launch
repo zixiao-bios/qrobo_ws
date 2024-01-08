@@ -1,18 +1,20 @@
 <launch>
   <!-- gazebo 参数 -->
+  <arg name="gazebo_world" default="office_small.world" />
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
 
+  <arg name="spawn_xyz" default="-x 0 -y 0 -z 0"/>
+
   <!-- robot config -->
   <param name="robot_description" command="$(find xacro)/xacro $(find jackal_description)/urdf/jackal.urdf.xacro" />
   
   <!-- 启动 gazebo -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-      <arg name="world_name" value="racecar_runway_without_cone.world"/>
-      <!-- <arg name="world_name" value="office_small.world"/> -->
+      <arg name="world_name" value="$(arg gazebo_world)"/>
       <arg name="debug" value="$(arg debug)" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="paused" value="$(arg paused)"/>
@@ -22,7 +24,7 @@
 
   <!-- 在 gazebo 中加载机器人 -->
   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-        args="-urdf -param robot_description -x -6 -y -2 -z 1 -model jackal" />
+        args="-urdf -param robot_description $(arg spawn_xyz) -model jackal" />
 
   <!-- 加载控制器 -->
   <rosparam command="load" file="$(find qrobo_sim)/config/control.yaml" />
