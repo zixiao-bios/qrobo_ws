@@ -1,9 +1,9 @@
 <launch>
   <!-- 运行模式，支持 mapping（建图）和 nav（导航）模式 -->
-  <arg name="mode" value="nav" doc="mapping or nav"/>
+  <arg name="mode" value="mapping" doc="mapping or nav"/>
 
   <!-- 是否使用手柄控制 -->
-  <arg name="use_joy" value="true" />
+  <arg name="use_joy" value="false" />
 
   <!-- 地图文件，仅在导航模式下使用 -->
   <arg name="map_file" value="$(find qrobo_nav)/maps/racecar_runway_without_cone.yaml" />
