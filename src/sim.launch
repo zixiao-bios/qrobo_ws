@@ -1,9 +1,9 @@
 <launch>
-  <!-- gazebo仿真世界 -->
+  <!-- 参数：gazebo仿真世界文件 -->
   <arg name="gazebo_world" value="office_small.world" />
   <!-- <arg name="gazebo_world" value="$(find qrobo_sim)/worlds/racecar_runway_without_cone.world" /> -->
 
-  <!-- 机器人生成位置 -->
+  <!-- 参数：机器人出生位置 -->
   <arg name="spawn_xyz" value="-x 0 -y 0 -z 0"/>
   <!-- <arg name="spawn_xyz" value="-x -6 -y -2 -z 1"/> -->
 
